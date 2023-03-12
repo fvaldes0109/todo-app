@@ -1,9 +1,11 @@
 import React from 'react';
 
-import icon_moon from '../Assets/images/icon-moon.svg';
-import bg_desktop_light from '../Assets/images/bg-desktop-light.jpg';
 import Checkbox from './Checkbox';
 import Task from './Task';
+
+import icon_moon from '../Assets/images/icon-moon.svg';
+import bg_desktop_light from '../Assets/images/bg-desktop-light.jpg';
+import bg_mobile_light from '../Assets/images/bg-mobile-light.jpg';
 
 export default class Home extends React.Component {
 
@@ -70,6 +72,15 @@ export default class Home extends React.Component {
   render() {
 
     const filter = this.state.activeFilter;
+
+    const selectors = (
+      <div className='selectors'>
+        <span className={this.state.activeFilter === 0 ? 'active-filter' : ''} onClick={() => this.setActiveFilter(0)}>All</span>
+        <span className={this.state.activeFilter === 1 ? 'active-filter' : ''} onClick={() => this.setActiveFilter(1)}>Active</span>
+        <span className={this.state.activeFilter === 2 ? 'active-filter' : ''} onClick={() => this.setActiveFilter(2)}>Completed</span>
+      </div>
+    );
+
     const taskList = this.state.tasks.filter(task => filter === 0 || (filter === 1 && !task.completed) || (filter === 2 && task.completed))
                                      .map(task => {
                                         return <Task
@@ -85,7 +96,10 @@ export default class Home extends React.Component {
     return (
       <>
         <div className="bg-image">
+        <picture>
+          <source media='(max-width: 980px)' srcSet={bg_mobile_light} />
           <img src={bg_desktop_light} alt="background" />
+        </picture>
         </div>
 
         <header>
@@ -105,15 +119,11 @@ export default class Home extends React.Component {
 
             <div className='tasks-footer'>
               <span>{this.state.tasks.length} items left</span>
-              <div className='selectors'>
-                {/* Replace for NavLink */}
-                <span className={this.state.activeFilter === 0 ? 'active-filter' : ''} onClick={() => this.setActiveFilter(0)}>All</span>
-                <span className={this.state.activeFilter === 1 ? 'active-filter' : ''} onClick={() => this.setActiveFilter(1)}>Active</span>
-                <span className={this.state.activeFilter === 2 ? 'active-filter' : ''} onClick={() => this.setActiveFilter(2)}>Completed</span>
-              </div>
+              {window.innerWidth >= 600 ? selectors : ''}
               <span className='clear-link' onClick={this.clearCompleted.bind(this)}>Clear Completed</span>
             </div>
           </div>
+          {window.innerWidth < 600 ? selectors : ''}
         </main>
       </>
     );

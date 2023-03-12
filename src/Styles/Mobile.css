@@ -1,0 +1,59 @@
+:root {
+  --Very-Light-Gray: hsl(0, 0%, 98%);
+  --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+  --Light-Grayish-Blue: hsl(233, 11%, 84%);
+  --Dark-Grayish-Blue: hsl(236, 9%, 61%);
+  --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+  --Bright-Blue: hsl(220, 98%, 61%);
+}
+
+@media (hover: none) {
+    
+	.cross {
+		visibility: visible;
+	}
+}
+
+@media (max-width: 600px) {
+
+	body {
+		min-height: auto;
+	}
+
+	#root {
+		width: 100%;
+	}
+
+	.App {
+		width: 100%;
+	}
+
+	header {
+		width: 90%;
+		padding: 0 5%;
+		margin-top: 20px;
+	}
+
+	main {
+		margin: 0 5%;
+	}
+
+	.input-area {
+		width: 90%;
+		padding: 0 5%;
+	}
+
+	.tasks-area {
+		padding: 0 5%;
+	}
+
+	.selectors {
+		background-color: white;
+		box-shadow: 0 10px 30px 0px rgba(0, 0, 0, 0.1);
+		height: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--Dark-Grayish-Blue);
+	}
+}
