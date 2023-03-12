@@ -1,0 +1,120 @@
+/* Import font from https://fonts.google.com/specimen/Josefin+Sans with weights 400 and 700 */
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,700');
+
+:root {
+  --Very-Light-Gray: hsl(0, 0%, 98%);
+  --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+  --Light-Grayish-Blue: hsl(233, 11%, 84%);
+  --Dark-Grayish-Blue: hsl(236, 9%, 61%);
+  --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+}
+
+body {
+  font-family: 'Josefin Sans';
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+}
+
+.bg-image {
+  width: 100%;
+  position: fixed;
+  z-index: -10;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.bg-image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+header {
+  display: flex;
+  width: 550px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  color: white;
+  letter-spacing: 15px;
+  font-size: 40px;
+}
+
+.white {
+  background-color: white;
+}
+
+.input-area {
+  display: flex;
+  width: 520px;
+  align-items: center;
+  border-radius: 5px;
+  height: 60px;
+  padding: 0 15px;
+}
+
+input {
+  font-family: 'Josefin Sans';
+  background-color: transparent;
+  border: none;
+  padding: 0 10px;
+  font-size: 16px;
+  width: 100%;
+  color: var(--Very-Dark-Grayish-Blue);
+}
+
+input::placeholder {
+  color: var(--Dark-Grayish-Blue);
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+.check {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid var(--Very-Light-Grayish-Blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.true-check {
+  background: linear-gradient(
+    135deg,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
+}
+
+.check img {
+  user-select: none;
+}
+
+.tasks-area {
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+.tasks-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  font-size: 13px;
+  box-shadow: 0 10px 30px 0px rgba(0, 0, 0, 0.1);
+  color: var(--Dark-Grayish-Blue);
+}
+
+.selectors span, .clear-link {
+  margin: 0 5px;
+  cursor: pointer;
+}
