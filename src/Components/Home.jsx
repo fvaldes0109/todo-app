@@ -13,40 +13,74 @@ export default class Home extends React.Component {
     this.state = {
       newTaskCompleted: false,
       tasks: [
-        { text: 'Tarea de prueba 1', completed: false },
-        { text: 'Tarea de prueba 2', completed: true },
-        { text: 'Tarea de prueba 3', completed: false },
+        { id: 1, text: 'Tarea de prueba 1', completed: false },
+        { id: 2, text: 'Tarea de prueba 2', completed: true },
+        { id: 3, text: 'Tarea de prueba 3', completed: false },
       ],
+      nextId: 4,
+      activeFilter: 0,
     }
+
+    this.setActiveFilter = this.setActiveFilter.bind(this);
   }
   
-
   addTask(e) {
 
     if (e.key === 'Enter' && e.target.value.length > 0) {
       
-      this.setState({ tasks: [...this.state.tasks, { text: e.target.value, completed: this.state.newTaskCompleted }],
+      this.setState({ tasks: [...this.state.tasks, { text: e.target.value, completed: this.state.newTaskCompleted, id: this.state.nextId }],
                       newTaskCompleted: false,
+                      nextId: this.state.nextId + 1,
       });
 
       e.target.value = '';
     }
   }
-
+  
   deleteTask(id) {
     
-    this.setState({ tasks: this.state.tasks.filter((task, index) => index !== id)});
+    this.setState({ tasks: this.state.tasks.filter((task, index) => task.id !== id)});
+  }
+
+  clearCompleted() {
+
+    this.setState({ tasks: this.state.tasks.filter((task, index) => !task.completed)});
   }
 
   toggleNewTask() {
     this.setState({ newTaskCompleted: !this.state.newTaskCompleted });
   }
 
+  toggleTaskStatus(id) {
+
+    this.setState({ tasks: this.state.tasks.map(task => {
+
+      if (task.id === id) {
+        return { id: task.id, text: task.text, completed: !task.completed };
+      }
+      else return task;
+    })});
+  }
+
+  setActiveFilter(newFilter) {
+
+    this.setState({ activeFilter: newFilter });
+  }
+
   render() {
 
-    const taskList = this.state.tasks.map((task, index) => {
-      return <Task key={index} id={index} text={task.text} completed={task.completed} deleteTask={this.deleteTask.bind(this)} />
-    });
+    const filter = this.state.activeFilter;
+    const taskList = this.state.tasks.filter(task => filter === 0 || (filter === 1 && !task.completed) || (filter === 2 && task.completed))
+                                     .map(task => {
+                                        return <Task
+                                                  key={task.id}
+                                                  id={task.id}
+                                                  text={task.text}
+                                                  completed={task.completed}
+                                                  deleteTask={this.deleteTask.bind(this)} 
+                                                  toggleTaskStatus={this.toggleTaskStatus.bind(this)}
+                                                />
+                                      });
 
     return (
       <>
@@ -73,11 +107,11 @@ export default class Home extends React.Component {
               <span>{this.state.tasks.length} items left</span>
               <div className='selectors'>
                 {/* Replace for NavLink */}
-                <span>All</span>
-                <span>Active</span>
-                <span>Completed</span>
+                <span className={this.state.activeFilter === 0 ? 'active-filter' : ''} onClick={() => this.setActiveFilter(0)}>All</span>
+                <span className={this.state.activeFilter === 1 ? 'active-filter' : ''} onClick={() => this.setActiveFilter(1)}>Active</span>
+                <span className={this.state.activeFilter === 2 ? 'active-filter' : ''} onClick={() => this.setActiveFilter(2)}>Completed</span>
               </div>
-              <span className='clear-link'>Clear Completed</span>
+              <span className='clear-link' onClick={this.clearCompleted.bind(this)}>Clear Completed</span>
             </div>
           </div>
         </main>

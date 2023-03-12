@@ -15,6 +15,7 @@ export default class Task extends React.Component {
 	
 	toggleStatus() {
 		this.setState({ completed: !this.state.completed });
+		this.props.toggleTaskStatus(this.props.id);
 	}
 
 	render() {
