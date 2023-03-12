@@ -8,13 +8,20 @@ export default class Checkbox extends React.Component {
 		super(props);
 		
 		this.state = {
-			selected: false,
+			selected: this.props.selected,
 		}
 	}
 	
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.selected !== this.props.selected) {
+			this.setState({ selected: this.props.selected });
+		}
+	}
+
 	toggleStatus() {
 
 		this.setState({ selected: !this.state.selected });
+		this.props.toggleStatus();
 	}
 
 	render() {
