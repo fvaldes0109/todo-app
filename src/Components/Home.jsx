@@ -3,7 +3,7 @@ import React from 'react';
 import Checkbox from './Checkbox';
 import Task from './Task';
 
-import icon_moon from '../Assets/images/icon-moon.svg';
+// import icon_moon from '../Assets/images/icon-moon.svg';
 import bg_desktop_light from '../Assets/images/bg-desktop-light.jpg';
 import bg_mobile_light from '../Assets/images/bg-mobile-light.jpg';
 
@@ -15,11 +15,14 @@ export default class Home extends React.Component {
     this.state = {
       newTaskCompleted: false,
       tasks: [
-        { id: 1, text: 'Tarea de prueba 1', completed: false },
-        { id: 2, text: 'Tarea de prueba 2', completed: true },
-        { id: 3, text: 'Tarea de prueba 3', completed: false },
+        { id: 1, text: 'Complete online JavaScript course', completed: true },
+        { id: 2, text: 'Jog around the park 3x', completed: false },
+        { id: 3, text: '10 minutes meditation', completed: false },
+        { id: 4, text: 'Read for 1 hour', completed: false },
+        { id: 5, text: 'Pick up groceries', completed: false },
+        { id: 6, text: 'Complete Todo App on Frontend Mentor', completed: false },
       ],
-      nextId: 4,
+      nextId: 7,
       activeFilter: 0,
     }
 
@@ -104,7 +107,7 @@ export default class Home extends React.Component {
 
         <header>
           <h1>TODO</h1>
-          <img src={icon_moon} alt="icon_moon" aria-label='Toggle dark mode'/>
+          {/* <img src={icon_moon} alt="icon_moon" aria-label='Toggle dark mode'/> */}
         </header>
 
         <main>
